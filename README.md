@@ -1,2 +1,2 @@
-# Generative AI Drone Simula
-A 2d drone simulation for studying robots + generative AI.
+# Generative AI Bot Simulation
+A 2D bot simulation for studying robots + generative AI.
