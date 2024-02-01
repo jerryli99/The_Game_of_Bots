@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    #container {
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: auto;
+    }
+
+    #canvas {
+        width: 800px;
+        height: 520px;
+        border: 1px solid #ccc;
+        margin-right: 20px;
+    }
+
+    #canvas-container {
+        overflow-x: auto;
+        overflow-y: auto;
+        margin-right: 20px;
+    }
+
+    #chat-window {
+        width: 360px;
+        height: 520px;
+        border: 1px solid #ccc;
+        overflow-y: auto;
+    }
+
+    #controllers {
+        display: flex;
+        margin-top: 20px;
+    }
+
+    button {
+        margin-right: 10px;
+    }
+    </style>
+
+</head>
+
+<body>
+    <div id="container">
+        <div id="canvas-container">
+            <canvas id="canvas" width="800" height="520"></canvas>
+        </div>
+
+        <div id="chat-window">
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati suscipit dolorem ducimus alias quibusdam tempore velit numquam sit id sed quaerat recusandae, perferendis quam nostrum non quisquam ratione voluptatum fugit!
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati suscipit dolorem ducimus alias quibusdam tempore velit numquam sit id sed quaerat recusandae, perferendis quam nostrum non quisquam ratione voluptatum fugit!
+            </p>
+        </div>
+    </div>
+
+    <div id="controllers">
+        <button onclick="start()">Start</button>
+        <button onclick="end()">End</button>
+        <button onclick="stop()">Stop</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script> 
+    <!-- I haev to put the script tag here so javascript will load after canvas is created :) -->
+</body>
+</html>
