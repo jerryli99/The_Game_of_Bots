@@ -107,11 +107,13 @@ function moveSquare(direction) {
 
     // Check for collision with obstacles
     if (newX >= 0 && newX < columns && newY >= 0 && newY < rows && grid[newY][newX] !== 1) {
-    squareX = newX;
-    squareY = newY;
-    drawGrid();
-    drawObstacles();
-    drawSquare();
+        squareX = newX;
+        squareY = newY;
+        drawGrid();
+        drawObstacles();
+        drawSquare();
+    } else {
+        console.log("collide :(");
     }
 }
 
