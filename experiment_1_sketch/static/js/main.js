@@ -26,6 +26,8 @@ grid[5][12] = 1;
 grid[7][15] = 1;
 grid[4][17] = 1;
 grid[8][16] = 1;
+grid[0][0] = 1;
+grid[12][10] = 2;
 
 function drawGrid() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -34,14 +36,14 @@ function drawGrid() {
 
     // Draw vertical lines
     for (let i = 0; i <= canvas.width; i += cellSize) {
-    ctx.moveTo(i, 0);
-    ctx.lineTo(i, canvas.height);
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i, canvas.height);
     }
 
     // Draw horizontal lines
     for (let j = 0; j <= canvas.height; j += cellSize) {
-    ctx.moveTo(0, j);
-    ctx.lineTo(canvas.width, j);
+        ctx.moveTo(0, j);
+        ctx.lineTo(canvas.width, j);
     }
 
     ctx.stroke();
@@ -53,13 +55,19 @@ function drawSquare() {
 }
 
 function drawObstacles() {
-    ctx.fillStyle = "black";
+    
     for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < columns; j++) {
-        if (grid[i][j] === 1) {
-        ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+        for (let j = 0; j < columns; j++) {
+            if (grid[i][j] === 1) {
+                ctx.fillStyle = "black";
+                ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+            }
+            
+            if (grid[i][j] === 2) {
+                ctx.fillStyle = "pink";
+                ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+            }
         }
-    }
     }
 }
 
