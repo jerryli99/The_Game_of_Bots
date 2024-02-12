@@ -3,57 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
     <style>
-    body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-    }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-    #container {
-        display: flex;
-        align-items: center;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
+        #container {
+            display: flex;
+            align-items: center;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
 
-    #canvas {
-        width: 800px;
-        height: 520px;
-        border: 1px solid #ccc;
-        margin-right: 20px;
-    }
+        #canvas {
+            width: 800px;
+            height: 520px;
+            border: 1px solid #ccc;
+            margin-right: 20px;
+        }
 
-    #canvas-container {
-        overflow-x: auto;
-        overflow-y: auto;
-        margin-right: 20px;
-    }
+        #canvas-container {
+            overflow-x: auto;
+            overflow-y: auto;
+            margin-right: 20px;
+        }
 
-    #chat-window {
-        width: 360px;
-        height: 520px;
-        border: 1px solid #ccc;
-        overflow-y: auto;
-        overflow-x: auto;
-    }
+        #chat-window {
+            width: 360px;
+            height: 520px;
+            border: 1px solid #ccc;
+            overflow-y: auto;
+            overflow-x: auto;
+        }
 
-    #controllers {
-        display: flex;
-        margin-top: 20px;
-    }
+        #controllers {
+            display: flex;
+            margin-top: 20px;
+        }
 
-    button {
-        margin-right: 10px;
-    }
+        button {
+            margin-right: 10px;
+        }
     </style>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script>
+        function updateTime() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/get_time', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById('current-time').innerText = response.time;
+                    //console.log(response);  // Log time to console
+                }
+            };
+            xhr.send();
+        }
+
+        // Update time every second
+        setInterval(updateTime, 1000);
+    </script>
 
 </head>
 
 <body>
+    <div><h1>Simulation 1</h1></div>
+    <p id="current-time">Loading...</p>
     <div id="container">
         <div id="canvas-container">
             <canvas id="canvas" width="800" height="520"></canvas>
@@ -72,7 +94,35 @@
         <button onclick="stop()">Stop</button>
     </div>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script> 
+    <script>
+
+        const blockData = {{block_data | tojson | safe}};
+        //console.log(blockData);
+    </script>
+ 
+ <script src="{{ url_for('static', filename='js/main.js') }}"></script> 
     <!-- I haev to put the script tag here so javascript will load after canvas is created :) -->
+
+    <script>
+        function getnumberNumber(n) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var response = JSON.parse(this.responseText);
+                    document.getElementById("number-result").innerText = "number " + ": " + response.number;
+                }
+            };
+            xhttp.open("GET", "/number/" + n, true);
+            xhttp.send();
+        }
+
+        // Calculate number numbers every 5 seconds
+        var i = 0;
+        setInterval(function() {
+            getnumberNumber(i);
+            i++;
+        }, 1000);
+    </script>
+    <div id="number-result"></div>
 </body>
 </html>

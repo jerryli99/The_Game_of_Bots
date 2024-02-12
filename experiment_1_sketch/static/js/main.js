@@ -55,7 +55,6 @@ function drawSquare() {
 }
 
 function drawObstacles() {
-    
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < columns; j++) {
             if (grid[i][j] === 1) {
@@ -105,6 +104,8 @@ function moveSquare(direction) {
         break;
     }
 
+    // Code need logic improvement
+    //-------------------------------------------------------------------------------------------
     // Check for collision with obstacles
     if (newX >= 0 && newX < columns && newY >= 0 && newY < rows && grid[newY][newX] !== 1) {
         squareX = newX;
@@ -115,8 +116,11 @@ function moveSquare(direction) {
     } else {
         console.log("collide :(");
     }
+    //----------------------------------------------------------------------------------------------
 }
 
+
+//just for testing
 document.addEventListener("keydown", function (event) {
     switch (event.key) {
     case "ArrowUp":
@@ -133,6 +137,12 @@ document.addEventListener("keydown", function (event) {
         break;
     }
 });
+
+
+//I might need to reorganize the code, seperate them into different files. I will do it another time.
+//get and post methods + interpreting json + convert json to movement for the agents.
+//console.log(blockData);
+
 
 // Initial draw
 drawGrid();
