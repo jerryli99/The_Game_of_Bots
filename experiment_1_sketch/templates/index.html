@@ -3,128 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        #container {
-            display: flex;
-            align-items: center;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        #canvas {
-            width: 800px;
-            height: 520px;
-            border: 1px solid #ccc;
-            margin-right: 20px;
-        }
-
-        #canvas-container {
-            overflow-x: auto;
-            overflow-y: auto;
-            margin-right: 20px;
-        }
-
-        #chat-window {
-            width: 360px;
-            height: 520px;
-            border: 1px solid #ccc;
-            overflow-y: auto;
-            overflow-x: auto;
-        }
-
-        #controllers {
-            display: flex;
-            margin-top: 20px;
-        }
-
-        button {
-            margin-right: 10px;
-        }
-    </style>
-
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-    <script>
-        function updateTime() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/get_time', true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    document.getElementById('current-time').innerText = response.time;
-                    //console.log(response);  // Log time to console
-                }
-            };
-            xhr.send();
-        }
-
-        // Update time every second
-        setInterval(updateTime, 1000);
-    </script>
-
+    <title>The Game of Bots</title>
 </head>
 
 <body>
-    <div><h1>Simulation 1</h1></div>
-    <p id="current-time">Loading...</p>
-    <div id="container">
-        <div id="canvas-container">
-            <canvas id="canvas" width="800" height="520"></canvas>
-        </div>
+    <h1>blabla bla</h1>
+    <p>
+        <h3>Universe Names:</h3>
+        1. A-normal-day: who got the target? <br>
+        2. Bunny-in-the-transparent-box: Hey! This is MY Box -- pigeonhole principle + block paint gun to disguise boxes<br>
+        3. Reverse: Which way? <br>
+        4. Obstacle-push-me: Uhm? Dodge<br>
+        5. I am nobody: But I know you <br>
+        6. Lava era: Who knows what is next<br>
+        7. Who-Sacrifice-First: Not me for sure<br>
+        8. Second-Chance: Reincarnation<br>
+        9. Make-a-wish: A fake Genie<br>
 
-        <div id="chat-window">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati suscipit dolorem ducimus alias quibusdam tempore velit numquam sit id sed quaerat recusandae, perferendis quam nostrum non quisquam ratione voluptatum fugit!
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati suscipit dolorem ducimus alias quibusdam tempore velit numquam sit id sed quaerat recusandae, perferendis quam nostrum non quisquam ratione voluptatum fugit!
-            </p>
-        </div>
-    </div>
+        <br>construst the world interaction logic or "game logic". <br>
 
-    <div id="controllers">
-        <button onclick="start()">Start</button>
-        <button onclick="end()">End</button>
-        <button onclick="stop()">Stop</button>
-    </div>
+        Tell me, artificial intelligence, what is intelligence?
 
-    <script>
 
-        const blockData = {{block_data | tojson | safe}};
-        //console.log(blockData);
-    </script>
- 
- <script src="{{ url_for('static', filename='js/main.js') }}"></script> 
-    <!-- I haev to put the script tag here so javascript will load after canvas is created :) -->
+    </p>
 
-    <!-- eeeeee, the code is like not well organized, but I will ignore this for now. At least I figured out how to update data 
-    dynamically to the front end -->
-    <script>
-        function getnumberNumber(n) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    var response = JSON.parse(this.responseText);
-                    document.getElementById("number-result").innerText = "number " + ": " + response.number;
-                }
-            };
-            xhttp.open("GET", "/number/" + n, true);
-            xhttp.send();
-        }
+    Think in Value(infinite) or Interest(finite)?
+    Empathy and perspective?
+    Contribute and Coorperation
+    <p>
+        for universe#2 (addiction, lack freindships, low self-esteem), the box is like a filter. Millenials grow up with snapchat, fackbook, etc...good at putting filters. Rabits will jump 
+        into the box to hide their shame...maybe. The environment is going to be interesting, but need more thoughts. Agents in the group chat can post bragging messages. They can brag about they have not hit 
+        any obstacles even though they hit every obstacles. The other agents can raise suspect and then check the blockchain records. If verified,
+        the braging agent will jump into the transparent box (to pretend nothing happened). Other agents will remember that and everyone will then move on.<br>
 
-        // Calculate number numbers every 5 seconds
-        var i = 0;
-        setInterval(function() {
-            getnumberNumber(i);
-            i++;
-        }, 1000);
-    </script>
-    <div id="number-result"></div>
+        for universe#6, lavas (fireblocks) emerge randomly (i am thinking about taking a random picture of the world to produce random numbers). Anyways, 
+        ofcourse there are some safe areas, but only 1 agent can occupy on area at a time. Agents can push each other or choose to let go this sfae area for now.
+        What will the conversation be? How will the 36 strategies work here?  
+
+    </p>
+
+    <a href="http://127.0.0.1:5000/u1" target="_blank">Universe#1</a>
+
 </body>
 </html>

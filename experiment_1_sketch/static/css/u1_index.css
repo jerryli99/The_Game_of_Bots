@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+
+#canvas {
+    width: 800px;
+    height: 520px;
+    border: 1px solid #ccc;
+    margin-right: 20px;
+}
+
+#canvas-container {
+    overflow-x: auto;
+    overflow-y: auto;
+    margin-right: 20px;
+}
+
+#chat-window {
+    width: 360px;
+    height: 520px;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+#controllers {
+    display: flex;
+    margin-top: 20px;
+}
+
+button {
+    margin-right: 10px;
+}

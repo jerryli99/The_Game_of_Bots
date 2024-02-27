@@ -67,7 +67,7 @@ function drawObstacles() {
                 ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
             }
         }
-    }
+    }//
 }
 
 function start() {
@@ -90,18 +90,22 @@ function moveSquare(direction) {
     let newY = squareY;
 
     switch (direction) {
-    case "up":
-        newY = squareY - 1;
-        break;
-    case "down":
-        newY = squareY + 1;
-        break;
-    case "left":
-        newX = squareX - 1;
-        break;
-    case "right":
-        newX = squareX + 1;
-        break;
+        case "up":
+            newY = squareY - 1;
+            break;
+        case "down":
+            newY = squareY + 1;
+            break;
+        case "left":
+            newX = squareX - 1;
+            break;
+        case "right":
+            newX = squareX + 1;
+            break;
+        case "none":
+            newX = newX;
+            newY = newY;
+            break;
     }
 
     // Code need logic improvement
@@ -113,8 +117,27 @@ function moveSquare(direction) {
         drawGrid();
         drawObstacles();
         drawSquare();
+        //console.log([squareX, squareY]);
     } else {
         console.log("collide :(");
+          // Send collision message to Flask backend
+          fetch('/handle_collision', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                message: 'Collision detected!',
+                coordinates: [newX, newY] //sned the current location of colliding with obstacle to server
+            }),
+        })
+        .then(response => response.json())
+        .then(update_block => {
+            //console.log(update_block); // Optional: Log response from backend
+            //need to change this code/....
+            moveSquare(update_block[0].x);
+        })
+        .catch(error => console.error('Error handling collision:', error));
     }
     //----------------------------------------------------------------------------------------------
 }
@@ -138,6 +161,17 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
+function updateBlockData() {
+    fetch('/get_updated_loc')
+        .then(response => response.json())
+        .then(data => {
+            //console.log(data); // For debugging
+            // Update canvas with new block data (add drawing logic here)
+
+            if (data[0].x > 0) moveSquare("right");
+        })
+        .catch(error => console.error('Error fetching block data:', error));
+}
 
 //I might need to reorganize the code, seperate them into different files. I will do it another time.
 //get and post methods + interpreting json + convert json to movement for the agents.
@@ -149,3 +183,7 @@ drawGrid();
 drawObstacles();
 drawSquare();
 console.log("hello")
+
+
+// Periodically update block data every second
+setInterval(updateBlockData, 1000);
