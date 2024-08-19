@@ -1,5 +1,7 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+canvas.tabIndex = 1;
+
 
 const cellSize = 40; // Size of each cell in the grid
 const rows = canvas.height / cellSize;
@@ -63,11 +65,15 @@ function drawObstacles() {
             }
             
             if (grid[i][j] === 2) {
-                ctx.fillStyle = "pink";
-                ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                // ctx.fillStyle = "pink";
+                // ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                // Draw the image 
+                let img = new Image();
+                img.src = 'static/cat.png'; // Replace 'image.png' with the path to your image file
+                ctx.drawImage(img, j * cellSize, i * cellSize, cellSize, cellSize);
             }
-        }
-    }//
+        } //end of inner-for-loop
+    } //end of outer-for-loop
 }
 
 function start() {
@@ -82,7 +88,7 @@ function end() {
 
 function stop() {
     console.log("Stop button clicked");
-    alert("hello")
+    alert("Simulation Stopped. If you want to continue, press [OK]")
 }
 
 function moveSquare(direction) {
@@ -144,7 +150,7 @@ function moveSquare(direction) {
 
 
 //just for testing
-document.addEventListener("keydown", function (event) {
+canvas.addEventListener("keydown", function (event) {
     switch (event.key) {
     case "ArrowUp":
         moveSquare("up");
@@ -159,6 +165,7 @@ document.addEventListener("keydown", function (event) {
         moveSquare("right");
         break;
     }
+    event.preventDefault();
 });
 
 function updateBlockData() {
@@ -187,3 +194,22 @@ console.log("hello")
 
 // Periodically update block data every second
 setInterval(updateBlockData, 1000);
+
+
+
+/*
+now that I have finished the super basic environment setup, I need to now figure out:
+1. how the agent can navigate. 
+2. make multiple agents to navigate, of course, which collisions as well.
+3. how the agents can interact with each other when i.e. collided to each other or from some kind of distance
+4. .... 
+
+
+As of date 3/16/2024, start figuring out step1.
+Step1:
+Every agent will do a greedy exploration. All agents will share a map memory. So think of it like 5 kids playing a large puzzle.
+Every kid will search every piece of puzzle, so kid#1 will pick a puzzle, then according to the number on the puzzle, insert it
+to the puzzle board. Does that mean the agents know the border of the map in this case? Well let's ignore that for now since this is
+just a simmulation.
+
+*/

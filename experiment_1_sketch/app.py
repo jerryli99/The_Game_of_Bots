@@ -43,7 +43,7 @@ def handle_collision():
     collision_message = data.get('message', 'No collision message received.')
     collision_coordinates = data.get('coordinates', {})
     print('Collision Message:', collision_message)
-    print('Collision coordinates:', collision_coordinates[0])
+    print('Collision coordinates:', collision_coordinates[0], collision_coordinates[1])
 
     if collision_coordinates[0] >= 20 and collision_coordinates[1] >= 0:
         # Add collision handling logic here
@@ -67,7 +67,7 @@ def handle_collision():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=5000, debug=True)
 
 
 
